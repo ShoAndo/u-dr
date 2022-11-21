@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 
 const Basic1 = () => {
-
   const [product, setProducts] = useState({name:'', price: ''})
 
   return (
