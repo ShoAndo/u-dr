@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    container_name: django_react_db
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - django_data_volume:/var/lib/postgresql/data
+  rest_api:
+    container_name: django_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./code/django_api:/code
+    tty: true
+    # command: python3 test_app/manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  web_front:
+    container_name: djanago_front
+    build:
+      context: .
+      dockerfile: Dockerfile_react
+    volumes:
+      - ./code/django_front:/code
+    tty: true
+    # command: sh -c " yarn start"
+    ports:
+      - 3000:3000
+    depends_on:
+      - rest_api
+volumes:
+  django_data_volume:
