@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 
 const Basic1 = () => {
-  const [product, setProducts] = useState({name:'', price: ''})
+  // const [product, setProducts] = useState({name:'', price: ''})
+  // const [count, setCount] = useState(0)
 
   return (
     <div>
       <form>
+        {/* <button onChange={() => setCount(prevCount=>prevCount+1)}></button> */}
         <input type='text' value={product.name}
         onChange={evt => setProducts({...product, name: evt.target.value})}/>
 
